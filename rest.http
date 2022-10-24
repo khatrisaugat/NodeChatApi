@@ -1,0 +1,52 @@
+@baseUrl=http://localhost:3000
+
+### User requests
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "Jhonny@gmail.com",
+    "password": "123456"
+}
+
+### User login
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "email": "Devilman@gmail.com",
+  "password": "Devilman"
+}
+
+###Room Type requests
+POST {{baseUrl}}/roomTypes
+Content-Type: application/json
+
+{
+  "name":"test"
+}
+###
+GET {{baseUrl}}/roomTypes
+###
+GET {{baseUrl}}/roomTypes/3
+###
+PUT {{baseUrl}}/roomTypes/3
+Content-Type: application/json
+
+{
+  "name":"test3"
+}
+###
+DELETE {{baseUrl}}/roomTypes/4
+###
+
+###Room requests
+POST {{baseUrl}}/rooms
+Content-Type: application/json
+
+{
+  "name":"test",
+  "roomTypeId": 1
+}
+###
