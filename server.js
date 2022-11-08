@@ -1,7 +1,9 @@
 const express = require("express");
+const passport = require("passport");
+const applyPassportStrategy = require("./app/helpers/passport");
 const { createServer } = require("http");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const { Server } = require("socket.io");
 // connection configurations
 // const mySqlConnection = require("./app/helpers/db");
@@ -16,8 +18,12 @@ db.authenticate()
     console.error("Unable to connect to the database:", err);
   });
 
+applyPassportStrategy(passport);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// app.use(passport.initialize());
+
+// require("./app/helpers/passport")(passport);
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
@@ -28,7 +34,7 @@ const io = new Server(server, {
 
 // socket.io
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log("a user connected" + socket.id);
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
@@ -38,7 +44,9 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(port, () => console.log("express server running on port 3000.."));
+server.listen(port, () =>
+  console.log("express server running on port " + port)
+);
 
 var routes = require("./app/routes/appRoutes"); //importing route
 routes(app); //register the route

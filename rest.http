@@ -1,14 +1,19 @@
-@baseUrl=http://localhost:3000
-
+@baseUrl=http://localhost:3001
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3ODkyNzA1LCJleHAiOjE2Njc5NzkxMDV9.xA7rnZDzUzQYJSwYg3QwPKh1QSR-NZ_T1HS-7TO5xhk
 ### User requests
 POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "Jhonny@gmail.com",
-    "password": "123456"
+  "name": "Jhonny English",
+  "email": "JhonnyEng@gmail.com",
+  "password": "Jhonny"
 }
+###User details
+GET {{baseUrl}}/users/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
 
 ### User login
 POST {{baseUrl}}/users/login

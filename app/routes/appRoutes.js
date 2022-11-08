@@ -1,3 +1,5 @@
+const passport = require("passport");
+
 module.exports = function (app) {
   // var todoList = require('../controllers/todoListController');
   //   var UserAuth = require("../controller/appController");
@@ -13,8 +15,16 @@ module.exports = function (app) {
 
   //   app.route("/users/login").post(UserAuth.login_a_user);
   const user = require("../controller/user/userController");
+  console.log(passport.authenticate("jwt", { session: false }));
   app.route("/users").post(user.register_a_user);
   app.route("/users/login").post(user.login_a_user);
+  app
+    .route("/users/:id")
+    .get(
+      passport.authenticate("jwt", { session: false }),
+      user.get_user_details
+    );
+  //   .get(passport.authenticate("jwt"), user.get_user_details);
   //route for room types
   const roomType = require("../controller/room/roomTypesController");
   app
